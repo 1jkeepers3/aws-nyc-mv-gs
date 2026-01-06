@@ -1,9 +1,12 @@
+import 'dotenv/config';
 import express from "express";
 import session from "express-session";
 import exphbs from "express-handlebars";
 import configRoutes from "./routes/index.js";
 import { logger } from "./middleware.js";
 import path from "path";
+
+
 
 const app = express();
 
@@ -69,7 +72,7 @@ app.set("view engine", "handlebars");
 app.use(
   session({
     name: "AuthenticationState",
-    secret: "This is a secret.. shhh don't tell anyone",
+    secret: process.env.SESSION_SECRET,
     saveUninitialized: false,
     resave: false,
     cookie: { maxAge: 1000 * 60 * 60 },
@@ -88,7 +91,9 @@ app.use((req, res) => {
   });
 });
 
-app.listen(3000, () => {
-  console.log("We've now got a server!");
-  console.log("Your routes will be running on http://localhost:3000");
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
+

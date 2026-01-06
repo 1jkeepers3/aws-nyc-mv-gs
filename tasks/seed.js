@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { crashes, users } from "../config/mongoCollections.js";
 import { createCrash } from "../data/crashes.js";
 import { register } from "../data/users.js";
