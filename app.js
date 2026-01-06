@@ -13,12 +13,12 @@ const app = express();
 
 app.set('trust proxy', 1);
 
-if (!process.env.MONGODB_URI) {
+if (!process.env.MONGO_URI) {
   console.error("ERROR: MONGODB_URI environment variable not set");
   process.exit(1);
 }
 
-mongoose.connect(process.env.MONGODB_URI)
+mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => {
     console.error("MongoDB connection error:", err);
@@ -97,7 +97,7 @@ app.use(
     saveUninitialized: false,
     resave: false,
     store: MongoStore.create({
-      mongoUrl: process.env.MONGODB_URI,
+      mongoUrl: process.env.MONGO_URI,
       ttl: 60 * 60, // 1 hour
       autoRemove: "native",
     }),
@@ -109,13 +109,6 @@ app.use(
     },
   })
 );
-
-
-// Log session for debugging
-app.use((req, res, next) => {
-  console.log("Session:", req.session);
-  next();
-});
 
 app.use(logger);
 
