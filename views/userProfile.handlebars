@@ -1,0 +1,70 @@
+<main class="container">
+  <div class="page-header">
+    <h2>{{subTitle}}</h2>
+    <h3>@{{userProfile.userId}}</h3>
+  </div>
+  <br />
+
+  <article>
+    <h3>Personal Details</h3>
+    <div class="user-details">
+      <p>
+        <span>Name:</span> {{userProfile.firstName}} {{userProfile.lastName}}<br>
+        <span>Email:</span> {{userProfile.email}}<br>
+        <span>Location:</span> {{userProfile.city}}, {{userProfile.state}}<br>
+        <span>Age:</span> {{userProfile.age}}<br>
+        <span>Gender:</span> {{userProfile.gender}}<br>
+        <span>Member Since:</span> {{userProfile.signupDate}}
+      </p>
+    </div>
+
+    <br />
+
+    <section>
+      <h4>Community Activity</h4>
+      <table class="my_coolratings_table">
+        <thead>
+          <tr>
+            <th style="min-width: 150px;">Social Credit Rating</th>
+            <th>Crashes Submitted</th>
+            <th>Crashes Witnessed</th>
+            <th>Crashes Commented</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="rating-cell">
+              {{#if isOwnProfile}}
+              <span class="score">{{userProfile.socialCreditRating}}</span>
+              {{else}}
+              <div class="rating-controls">
+                <form action="/users/rate/{{userProfile._id}}/up" method="POST" style="display:inline;">
+                  <button type="submit" class="vote-btn {{#if isUpvoted}}selected-up{{/if}}">
+                    ▲
+                  </button>
+                </form>
+                <span class="score">{{userProfile.socialCreditRating}}</span>
+                <form action="/users/rate/{{userProfile._id}}/down" method="POST" style="display:inline;">
+                  <button type="submit" class="vote-btn {{#if isDownvoted}}selected-down{{/if}}">
+                    ▼
+                  </button>
+                </form>
+              </div>
+              {{/if}}
+            </td>
+            <td>{{userProfile.submittedCrashIds.length}}</td>
+            <td>
+              {{#if userProfile.crashesWitnessed}}
+              {{userProfile.crashesWitnessed}}
+              {{else}}
+              0
+              {{/if}}
+            </td>
+            <td>{{userProfile.commentedCrashIds.length}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <br />
+    </section>
+  </article>
+</main>

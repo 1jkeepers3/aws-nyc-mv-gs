@@ -1,0 +1,144 @@
+<main class="container">
+  <div class="page-header">
+    <h1>{{subTitle}}</h1>
+  </div>
+  <br />
+
+  {{#if message}}
+  <div class="success">{{message}}</div>
+  {{/if}}
+
+  <article>
+    {{#if crash}}
+    <div class="crash-poster">
+      {{#if crash.photos.length}}
+      <img class="crash-poster-details" alt="{{crash.summary}} Poster" src="{{firstPhoto crash.photos}}" />
+      {{else}}
+      <img class="crash-poster-details" alt="No Image Available" src="/public/images/no-image-available.png" />
+      {{/if}}
+    </div>
+
+      <div class="share-box">
+        <h3>Share Report</h3>
+        <form action="/crashes/{{crash._id}}/share" method="POST">
+          <input
+            type="email"
+            name="email"
+            placeholder="Enter recipient's email"
+            aria-label="Email Address"
+            required
+          />
+          <button type="submit">Send</button>
+        </form>
+      </div>
+
+      <div class="witness-reports-box">
+        <h3>Witness Reports</h3>
+        <div class="report-controls">
+          <form action="/crashes/{{crash._id}}/verify" method="POST">
+            <button type="submit" class="vote-btn {{#if hasVerified}}selected-up{{/if}}" aria-label="Confirm Accuracy">
+              &#10004;
+            </button>
+          </form>
+
+          <span class="report-percentage">{{#if crash.accuracyPercentage}}{{crash.accuracyPercentage}}{{else}}0{{/if}}%</span>
+
+          <form action="/crashes/{{crash._id}}/reject" method="POST">
+            <button type="submit" class="vote-btn {{#if hasRejected}}selected-down{{/if}}" aria-label="Report Inaccuracy">
+              &#10006;
+            </button>
+          </form>
+        </div>
+        <p class="witness-list">
+          {{#if witnessDisplayList.length}}
+            <strong>Votes by:</strong> 
+            {{#each witnessDisplayList}}
+              <span class="{{this.colorClass}}">{{this.name}}</span>{{#unless @last}}, {{/unless}}
+            {{/each}}
+          {{else}}
+            No witness reports yet.
+          {{/if}}
+        </p>
+      </div>
+
+    <h2>Summary</h2>
+    <p>{{crash.summary}}</p>
+
+    <section>
+      <h3>More Info</h3>
+      <table class="my_coolratings_table">
+        <tr>
+          <th>Occurred</th>
+          <th>Borough</th>
+          <th>Zip Code</th>
+          <th>Number of Injured</th>
+          <th>Number of Killed</th>
+          <th>Pedestrians Injured</th>
+          <th>Pedestrians Killed</th>
+        </tr>
+        <tr>
+          <td>{{crash.occurredAt}}</td>
+          <td>{{crash.borough}}</td>
+          <td>{{crash.zipCode}}</td>
+          <td>{{crash.personsInjured}}</td>
+          <td>{{crash.personsKilled}}</td>
+          <td>{{crash.pedestriansInjured}}</td>
+          <td>{{crash.pedestriansKilled}}</td>
+        </tr>
+      </table>
+      <br />
+    </section>
+    <section id="comments">
+      <h3>Comments</h3>
+
+      {{#if parentComments.length}}
+      <ul>
+        {{#each parentComments}}
+        <li>
+          <span class="commentor-name">
+            <a href="/users/profile/{{this.userId}}">{{this.firstName}} {{this.lastName}}</a>:
+          </span>
+          <span>{{this.text}}</span>
+          <span class="comment-time"> ({{this.createdAt}})</span>
+          <button type="button" class="reply-btn" data-comment-id="{{this._id}}">Reply</button>
+          <!-- Replies to parent comment -->
+          <ul class="comment-reply">
+            {{#each ../replies}}
+            {{#ifCond this.parentCommentId ../this._id}}
+            <li>
+              <span class="commentor-name">
+                <a href="/users/profile/{{this.userId}}">{{this.firstName}} {{this.lastName}}</a>:
+              </span>
+              <span>{{this.text}}</span>
+              <span class="comment-time"> ({{this.createdAt}})</span>
+
+            </li>
+            {{/ifCond}}
+            {{/each}}
+          </ul>
+        </li>
+        {{/each}}
+      </ul>
+      {{else}}
+      <p>This crash has no comments yet. Be the first to comment!</p>
+      {{/if}}
+      <!-- add new comment -->
+      <h4>Add a Comment</h4>
+      {{#if commentError}}
+      <p class="error">{{commentError}}</p>
+      {{/if}}
+      <form method="POST" action="/crashes/{{crash._id}}/comments">
+        <label for="text">Comment:</label><br />
+        <p id="comment-error" class="error"></p>
+        <textarea name="text" id="text" rows="4" cols="50"></textarea><br /><br />
+        <!-- reply to parentComment -->
+        <input type="hidden" id="parentCommentId" name="parentCommentId" value="">
+
+        <button type="submit">Submit Comment</button>
+      </form>
+    </section>
+    {{else}}
+    <p class="error">{{error}}</p>
+    {{/if}}
+  </article>
+</main>

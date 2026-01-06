@@ -1,0 +1,81 @@
+# Node / Express / Mongo .gitignore
+# Generated to ignore common Node.js, Express, and MongoDB development artifacts
+
+# Node modules
+node_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Runtime data
+pids/
+*.pid
+*.seed
+
+# Coverage and test output
+coverage/
+.nyc_output/
+lcov-report/
+
+# Build output
+dist/
+build/
+out/
+
+# Next.js, parcel, and other frameworks caches
+.next/
+.parcel-cache/
+.cache/
+
+# Optional npm cache directory
+.npm/
+
+# dotenv environment files (keep example files in repo)
+.env
+.env.*.local
+.env.local
+
+# TypeScript incremental build info
+*.tsbuildinfo
+
+# IDEs and editors
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Docker
+docker-compose.override.yml
+
+# Misc
+*.pem
+*.key
+*.crt
+*.log.gz
+
+# MongoDB dumps and runtime files
+dump/
+mongod.lock
+
+# Temporary files
+tmp/
+temp/
+*.swp
+
+# Keep this file in the repo. If you want to ignore lockfiles, uncomment below
+# (Note: locking ensures reproducible installs — usually commit `package-lock.json`/`yarn.lock`)
+package-lock.json
+group-21-final-project-cs-546-a
+
+# uploads folder
+public/uploads/*
+!public/uploads/.gitkeep

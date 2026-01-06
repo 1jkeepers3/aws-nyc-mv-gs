@@ -1,0 +1,13 @@
+<main class="container">
+  <div class="page-header">
+    <h1 class="error">{{subTitle}}</h1>
+  </div>
+  <div>
+    <p class="error">{{error}}</p>
+    {{#if user}}
+      <a href="/landing">Go back to Landing Page</a>
+    {{else}}
+      <a href="/login">Go back to Login Page</a>
+    {{/if}}
+  </div>
+</main>

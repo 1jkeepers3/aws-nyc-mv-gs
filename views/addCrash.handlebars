@@ -1,0 +1,190 @@
+<main class="container">
+  <div class="page-header">
+    <h1>{{subTitle}}</h1>
+  </div>
+  <section>
+
+    <p class="lead">Please act as a "Good Samaritan" and provide as much
+      accurate information as possible.</p>
+
+    {{#if error}}
+      <div
+        class="error"
+        style="color: red; font-weight: bold; margin-bottom: 20px;"
+      >
+        <p>{{error}}</p>
+      </div>
+    {{/if}}
+
+    <div class='form-container'>
+      <form method='POST' action='/crashes/add' enctype="multipart/form-data">
+
+        <fieldset>
+          <legend>Crash Details & Location</legend>
+
+          <label for='occurredAt'>Date & Time of Crash:</label>
+          <input type='datetime-local' id='occurredAt' name='occurredAt' value="{{occurredAt}}" required />
+          <br /><br />
+
+          <label for='borough'>Borough:</label>
+          <select id='borough' name='borough' data-selected="{{borough}}" required >
+            <option value='' disabled selected>Select a Borough</option>
+            <option value='Manhattan'>Manhattan</option>
+            <option value='Brooklyn'>Brooklyn</option>
+            <option value='Queens'>Queens</option>
+            <option value='Bronx'>Bronx</option>
+            <option value='Staten Island'>Staten Island</option>
+          </select>
+          <br /><br />
+
+          <label for='zipCode'>Zip Code:</label>
+          <input type='text' id='zipCode' name='zipCode' pattern='[0-9]{5}' title='Five digit zip code'
+            value="{{zipCode}}" required />
+          <br /><br />
+
+          <label for='onStreet'>On Street (Primary):</label>
+          <input type='text' id='onStreet' name='onStreet' placeholder='e.g. 5th Avenue' value="{{onStreet}}"
+            required />
+          <br /><br />
+
+          <label for='crossStreet'>Cross Street:</label>
+          <input type='text' id='crossStreet' name='crossStreet' placeholder='e.g. 42nd Street'
+            value="{{crossStreet}}" />
+          <br /><br />
+
+          <label for='latitude'>Latitude (optional):</label>
+          <input type='number' step='any' id='latitude' name='latitude' placeholder='e.g. 40.7128'
+            value="{{latitude}}" />
+
+          <label for='longitude'>Longitude (optional):</label>
+          <input type='number' step='any' id='longitude' name='longitude' placeholder='e.g. -74.0060'
+            value="{{longitude}}" />
+        </fieldset>
+        <br />
+
+        <fieldset>
+          <legend>Casualties & Severity</legend>
+          <p>Please enter the number of people involved (Enter 0 if none).</p>
+
+          <label for='personsInjured'>Total Persons Injured:</label>
+          <input type='number' id='personsInjured' name='personsInjured' min='0'
+            value="{{#if personsInjured}}{{personsInjured}}{{else}}0{{/if}}" required />
+
+          <label for='personsKilled'>Total Persons Killed:</label>
+          <input type='number' id='personsKilled' name='personsKilled' min='0'
+            value="{{#if personsKilled}}{{personsKilled}}{{else}}0{{/if}}" required />
+          <br /><br />
+
+          <label for='pedestriansInjured'>Pedestrians Injured:</label>
+          <input type='number' id='pedestriansInjured' name='pedestriansInjured' min='0'
+            value="{{#if pedestriansInjured}}{{pedestriansInjured}}{{else}}0{{/if}}" />
+
+          <label for='cyclistsInjured'>Cyclists Injured:</label>
+          <input type='number' id='cyclistsInjured' name='cyclistsInjured' min='0'
+            value="{{#if cyclistsInjured}}{{cyclistsInjured}}{{else}}0{{/if}}" />
+
+          <label for='motoristsInjured'>Motorists Injured:</label>
+          <input type='number' id='motoristsInjured' name='motoristsInjured' min='0'
+            value="{{#if motoristsInjured}}{{motoristsInjured}}{{else}}0{{/if}}" />
+        </fieldset>
+        <br />
+
+        <fieldset>
+          <legend>Primary Vehicle Involved</legend>
+
+          <label for="vehicleType">Vehicle Type:</label>
+          <select id="vehicleType" name="vehicleType" required>
+            <option value="Sedan">Sedan</option>
+            <option value="SUV">SUV</option>
+            <option value="Truck">Truck</option>
+            <option value="Bus">Bus</option>
+            <option value="Motorcycle">Motorcycle</option>
+            <option value="Bicycle">Bicycle</option>
+            <option value="Other">Other</option>
+          </select>
+          <br /><br />
+
+          <label for='make'>Make:</label>
+          <input type='text' id='make' name='make' placeholder='e.g. Toyota' value="{{make}}" required />
+
+          <label for='model'>Model:</label>
+          <input type='text' id='model' name='model' placeholder='e.g. Camry' value="{{model}}" required />
+
+          <label for='year'>Year:</label>
+          <input type='number' id='year' name='year' min='1950' max='2026' placeholder='2020' value="{{year}}" />
+          <br /><br />
+
+          <label for='stateRegistration'>License Plate State:</label>
+          <input type='text' id='stateRegistration' name='stateRegistration' maxlength='2' placeholder='NY'
+            value="{{stateRegistration}}" />
+        </fieldset>
+        <br />
+
+        <fieldset>
+          <legend>Secondary Vehicle (Optional)</legend>
+          <p>If another vehicle was involved, enter its details here.</p>
+
+          <label for="vehicleType2">Vehicle Type:</label>
+          <select id="vehicleType2" name="vehicleType2">
+            <option value="" selected>-- Select Type --</option>
+            <option value="Sedan">Sedan</option>
+            <option value="SUV">SUV</option>
+            <option value="Truck">Truck</option>
+            <option value="Bus">Bus</option>
+            <option value="Motorcycle">Motorcycle</option>
+            <option value="Bicycle">Bicycle</option>
+            <option value="Other">Other</option>
+          </select>
+          <br /><br />
+
+          <label for="make2">Make:</label>
+          <input type="text" id="make2" name="make2" placeholder="e.g. Ford" value="{{make2}}">
+
+          <label for="model2">Model:</label>
+          <input type="text" id="model2" name="model2" placeholder="e.g. Explorer" value="{{model2}}">
+
+          <label for="year2">Year:</label>
+          <input type="number" id="year2" name="year2" min="1950" max="2026" placeholder="2022" value="{{year2}}">
+          <br><br>
+
+          <label for="stateRegistration2">License Plate State:</label>
+          <input type="text" id="stateRegistration2" name="stateRegistration2" maxlength="2" placeholder="NJ"
+            value="{{stateRegistration2}}">
+        </fieldset>
+        <br />
+
+        <fieldset>
+          <legend>Description & Evidence</legend>
+
+          <label for='summary'>Crash Description:</label><br />
+          <textarea id='summary' name='summary' rows='4' cols='50' placeholder='Describe what happened...'
+            required>{{summary}}</textarea>
+          <br /><br />
+
+          <p><strong>Add a Photo (Choose One Method):</strong></p>
+
+          <label for='photo'>Option 1: Upload from Device:</label>
+          <input type='file' id='photo' name='photo' accept="image/*">
+          <br /><br />
+
+          <label for='photoUrl'>Option 2: Paste a URL:</label>
+          <input type='url' id='photoUrl' name='photoUrl' placeholder='https://example.com/image.jpg'
+            value="{{photoUrl}}" />
+
+        </fieldset>
+        <br />
+
+        <button type='submit'>Submit Crash Report</button>
+
+        <script>
+          document.querySelectorAll('select[data-selected]').forEach(select => {
+            const val = select.getAttribute('data-selected');
+            if (val) select.value = val;
+          });
+        </script>
+      </form>
+      <br />
+      <a href="/landing">Cancel and Return Home</a>
+    </div>
+  </section>
+</main>

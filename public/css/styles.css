@@ -1,0 +1,579 @@
+/*This file should have 10 CSS rulesets */
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 2px;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+footer {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+footer p {
+  margin: 0;
+}
+
+footer a {
+  color: #fff;
+  text-decoration: none;
+}
+/* To be used if navigation is added later essentially for the final project */
+nav {
+  background-color: #444;
+  padding: 10px;
+}
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+nav ul li {
+  display: inline-block;
+  margin-right: 10px;
+}
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+nav ul li a:hover {
+  text-decoration: underline;
+}
+main {
+  padding: 10px;
+  padding-bottom: 100px;
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin: 8px 0 10px 0;
+}
+.page-header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+.page-header-link {
+  white-space: nowrap;
+  text-decoration: none;
+  color: #007bff;
+  font-weight: 600;
+}
+.page-header-link:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+.lead {
+  font-size: 1.25rem;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+h1 {
+  font-size: 22px;
+}
+h2 {
+  font-size: 18px;
+}
+p {
+  margin-bottom: 20px;
+}
+a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+a:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+a:focus {
+  outline: 2px dashed #0056b3;
+}
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 10px;
+}
+form {
+  margin: 5px;
+}
+.form-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 30px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: block;
+  justify-content: center;
+}
+.form-group {
+  margin-bottom: 15px;
+}
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+input,
+select,
+textarea {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-right: 10px;
+  border-radius: 5px;
+  border: 1.5px solid #ccc;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+button[type="submit"] {
+  display: block;
+  width: 100%;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 16px;
+}
+button[type="submit"]:hover {
+  background-color: #555;
+}
+.crash-poster {
+  max-width: 250px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 10px auto;
+  display: block;
+}
+
+.crash-poster-details {
+  max-width: 500px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 10px auto;
+  display: block;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
+.crash-info {
+  margin: 20px 0;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.crash-info-summary {
+  font-weight: bold;
+  text-transform: capitalize;
+  color: #333;
+  margin-bottom: 3px;
+}
+
+.crash-info-data {
+  margin-left: 10px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+/* Grid and card layout for crash results */
+.crash-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+  margin: 10px 0 40px 0;
+}
+
+.crash-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.card-body {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.share-box {
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f4f4f4;
+  border-radius: 8px;
+  text-align: center;
+}
+.share-box form {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+.share-box input {
+  margin: 0;
+  flex-grow: 1;
+}
+.share-box button {
+  width: auto;
+}
+
+.card-meta p {
+  margin: 0;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+.my_coolratings_table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.my_coolratings_table th,
+.my_coolratings_table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.my_coolratings_table th {
+  background-color: #f2f2f2;
+  text-align: left;
+}
+
+.my_coolratings_table tr:nth-child(even) {
+  background-color: #bebfc5;
+}
+
+.my_coolratings_table tr:hover {
+  background-color: #ddd;
+}
+
+.my_coolratings_table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color: #4a412a;
+  color: white;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+}
+
+.crash-not-found {
+  color: #f700ff;
+  font-weight: bold;
+}
+
+.header-link {
+  display: flex;
+  justify-content: space-between;
+}
+
+.auth-link a {
+  text-align: center;
+  display: block;
+}
+
+.flex-container {
+  display: flex;
+  gap: 10px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr; 
+  gap: 10px; 
+}
+
+.column-chart {
+  padding: 5px;
+}
+
+.row-container {
+  display: flex;
+  gap: 20px;
+}
+
+.column {
+  flex: 1;
+  padding: 5px;
+  }
+
+.chart-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  height: 400px;
+  width: 40vw;
+}
+.crashesByBorough {
+  text-align: center;
+}
+
+.caption {
+  text-align: left;
+  font-size: 16px;
+  color: #666;
+  margin-top: 5px;
+}
+.comment-reply {
+  margin-left: 25px;
+}
+.commentor-name {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.success {
+  color: green;
+  font-weight: bold;
+  background-color: #e0ffe0;
+}
+
+/* Quick Links: fixed at bottom on desktop, flow on small screens */
+.quick-links {
+  position: fixed;
+  bottom: 47px;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.quick-links .header-link {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 12px;
+  background: rgba(255, 255, 255, 0.98);
+  padding: 10px 16px;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  pointer-events: auto;
+}
+
+.quick-links h3 {
+  display: none;
+}
+
+.quick-links .header-link a {
+  display: inline-block;
+  padding: 6px 12px;
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.quick-links .header-link a:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+.greeting, .user-details p span {
+  font-weight: bold;
+}
+
+@media (max-width: 900px) {
+  .quick-links {
+    position: static;
+    width: 100%;
+    box-shadow: none;
+    margin: 12px 0;
+    pointer-events: auto;
+  }
+  .quick-links h3 {
+    display: block;
+    margin: 0 0 8px 0;
+    font-size: 1rem;
+    color: #666;
+  }
+  .quick-links .header-link {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    background: none;
+    padding: 0;
+    box-shadow: none;
+    max-width: none;
+  }
+  .quick-links .header-link a {
+    display: inline-block;
+    margin: 0;
+    padding: 6px 8px;
+  }
+}
+
+.rating-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.vote-btn {
+  background: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 2px 8px;
+  font-size: 1.2rem;
+  color: #555;
+  transition: all 0.2s;
+}
+
+.vote-btn:hover {
+  background-color: #f0f0f0;
+}
+
+.selected-up {
+  background-color: #d4edda !important;
+  border-color: #28a745 !important;
+  color: #28a745 !important;
+}
+.selected-up:hover {
+  background-color: #c3e6cb !important;
+}
+
+.selected-down {
+  background-color: #f8d7da !important;
+  border-color: #dc3545 !important;
+  color: #dc3545 !important;
+}
+.selected-down:hover {
+  background-color: #f5c6cb !important;
+}
+
+.score {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.witness-reports-box {
+  margin: 15px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.report-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.report-controls form {
+  margin: 0;
+  display: inline-block;
+}
+
+.report-percentage {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.text-success {
+  color: green;
+}
+
+.text-danger {
+  color: red;
+}
+
+.witness-reports-box {
+  margin: 15px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.report-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.report-controls form {
+  margin: 0;
+  display: inline-block;
+}
+
+.report-percentage {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.text-success {
+  color: green;
+}
+
+.text-danger {
+  color: red;
+}
+
+.reply-btn {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 16px;
+}
+.reply-btn:hover {
+  background-color: #555;
+}
+
+.comment-time {
+  color: #888;
+  font-size: 0.9rem;
+}

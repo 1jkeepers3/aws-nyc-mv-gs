@@ -1,0 +1,287 @@
+<main class="container">
+  <div class="page-header">
+    <h1>{{subTitle}}</h1>
+  </div>
+  {{#if error}}
+    <p class="error">{{error}}</p>
+  {{/if}}
+
+  <section>
+    <h2><strong>Overall Crash Statistics by Borough</strong></h2>
+    <div class="grid-container">
+      <div class="column-chart">
+        <table class="my_coolratings_table">
+          <tr>
+            <th>Borough</th>
+            <th>Pedestrians Injured</th>
+            <th>Pedestrians Killed</th>
+            <th>Motorists Injured</th>
+            <th>Motorists Killed</th>
+          </tr>
+          {{#each crashesByBoroughWithStats}}
+            <tr>
+              <td>{{this._id}}</td>
+              <td>{{this.pedestriansInjured}}</td>
+              <td>{{this.pedestriansKilled}}</td>
+              <td>{{this.motoristsInjured}}</td>
+              <td>{{this.motoristsKilled}}</td>
+            </tr>
+          {{/each}}
+        </table>
+      </div>
+      <div class="column-chart"></div>  
+    </div>
+  </section>
+  <br />
+
+  <section>
+    <div class="grid-container">
+      <div class="column-chart">
+        <h2><strong>Crashes by Borough and Year</strong></h2>
+        <div class="chart-container">
+          <canvas id="crashesByBorough"></canvas>
+          <script
+            src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"
+          ></script>
+          <script>
+            const crashesByBoroughAndYear =
+            {{#if crashesByBoroughObj}}{{{json
+                crashesByBoroughObj
+              }}}{{else}}{}{{/if}}; 
+              
+            const crashesLabels = (crashesByBoroughAndYear && crashesByBoroughAndYear.labels) ? 
+              crashesByBoroughAndYear.labels : ['Manhattan', 'Bronx', 'Brooklyn', 'Queens', 'Staten Island']; 
+            const crashesDataPoints = (crashesByBoroughAndYear && crashesByBoroughAndYear.data) ? 
+              crashesByBoroughAndYear.data : [0, 1,2, 3, 4]; 
+            const ctx1 = document.getElementById('crashesByBorough'); 
+            if (ctx1) { 
+              new Chart(ctx1, { 
+                type: 'bar', 
+                data: { 
+                  labels: crashesLabels,
+                  datasets: [{ 
+                    label: 'Crashes by Borough and Year', 
+                    data: crashesDataPoints, borderColor: 'rgba(29, 53, 87, 1)',
+                    backgroundColor: 'rgba(29, 53, 87, 0.65)', 
+                    pointRadius: 3, 
+                    tension: 0.25, 
+                    fill: true 
+                  }] 
+                }, 
+                options: { 
+                  responsive: true,
+                  maintainAspectRatio: false, 
+                  scales: { 
+                    y: { 
+                      beginAtZero: true, 
+                      title: {
+                        display: true, 
+                        text: 'Crashes' 
+                      }                  
+                    }, 
+                    x: { 
+                      title: { 
+                        display: true, 
+                        text: 'Boroughs' 
+                      } 
+                    } 
+                  } 
+                } 
+              }); 
+            }
+          </script>
+        </div>
+      </div>
+      <div class="column-chart"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="grid-container">
+      <div class="column-chart">
+        <h2>Pedestrians Injured by Borough and Year</h2>
+        <div class="chart-container">
+          <canvas id="pedestriansInjuredChart"></canvas>
+          <script>
+            const pedestriansInjuredByBoroughAndYear =
+            {{#if pedestriansInjuredByBoroughObj}}{{{json
+                pedestriansInjuredByBoroughObj
+              }}}{{else}}{}{{/if}}; 
+              
+            const pedestriansInjuredLabels = (pedestriansInjuredByBoroughAndYear && pedestriansInjuredByBoroughAndYear.labels) ?
+            pedestriansInjuredByBoroughAndYear.labels : ['Manhattan', 'Bronx','Brooklyn', 'Queens', 'Staten Island']; 
+            const pedestriansInjuredDataPoints = (pedestriansInjuredByBoroughAndYear && pedestriansInjuredByBoroughAndYear.data) ?
+            pedestriansInjuredByBoroughAndYear.data : [0, 1, 2, 3, 4];
+            const ctx2 = document.getElementById('pedestriansInjuredChart'); 
+            if (ctx2) { 
+              new Chart(
+                ctx2, { 
+                  type: 'bar', 
+                  data: { 
+                    labels: pedestriansInjuredLabels, 
+                    datasets: [{ 
+                      label: 'Pedestrians Injured by Borough and Year', 
+                      data: pedestriansInjuredDataPoints,
+                      borderColor: 'rgba(255, 153, 51, 1)', 
+                      backgroundColor: 'rgba(255,153, 51, 0.65)', 
+                      pointRadius: 3, 
+                      tension: 0.25, 
+                      fill: true 
+                    }] 
+                  }, 
+                  options: { 
+                    responsive: true, 
+                    maintainAspectRatio: false, 
+                    scales: { 
+                      y: { beginAtZero: true, title: { display: true, text: 'Pedestrians Injured' } }, 
+                      x: { title: { display: true, text: 'Boroughs' } } 
+                    } 
+                  } 
+                }); 
+            }
+          </script>
+        </div>
+      </div>
+
+      <div class="column-chart">
+        <h2>Pedestrians Killed by Borough and Year</h2>
+        <div class="chart-container">
+           <canvas id="pedestriansKilledChart"></canvas>
+          <script>
+            const pedestriansKilledByBoroughAndYear =
+            {{#if pedestriansKilledByBoroughObj}}{{{json
+                pedestriansKilledByBoroughObj
+              }}}{{else}}{}{{/if}}; 
+            const pedestriansKilledLabels = (pedestriansKilledByBoroughAndYear &&  pedestriansKilledByBoroughAndYear.labels) ?
+            pedestriansKilledByBoroughAndYear.labels : ['Manhattan', 'Bronx','Brooklyn', 'Queens', 'Staten Island']; 
+            const pedestriansKilledDataPoints = (pedestriansKilledByBoroughAndYear && pedestriansKilledByBoroughAndYear.data) ?
+            pedestriansKilledByBoroughAndYear.data : [0, 1, 2, 3, 4]; 
+            const ctx3 = document.getElementById('pedestriansKilledChart'); 
+            if (ctx3) { 
+              new Chart(ctx3, { 
+                type: 'bar', 
+                data: { 
+                  labels: pedestriansKilledLabels,
+                  datasets: [{ 
+                    label: 'pedestrians Killed by Borough and Year', 
+                    data: pedestriansKilledDataPoints, borderColor: 'rgba(214, 40, 40, 1)',
+                    backgroundColor: 'rgba(214, 40, 40, 0.65)', 
+                    pointRadius: 3, 
+                    tension: 0.25, 
+                    fill: true 
+                  }]
+                }, 
+                options: { 
+                  responsive: true,
+                  maintainAspectRatio: false, 
+                  scales: { 
+                    y: { 
+                      beginAtZero: true, 
+                      title: { display: true, text: 'pedestrians Killed' } 
+                    }, 
+                    x: { 
+                      title: {display: true, text: 'Boroughs' } 
+                    } 
+                  } 
+                } 
+              }); 
+            }
+          </script>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="grid-container">
+      <div class="column-chart">
+        <h2>Motorists Injured by Borough and Year</h2>
+        <div class="chart-container">
+          <canvas id="motoristsInjuredChart"></canvas>
+          <script>
+            const motoristsInjuredByBoroughAndYear =
+            {{#if motoristsInjuredByBoroughObj}}{{{json
+                motoristsInjuredByBoroughObj
+              }}}{{else}}{}{{/if}}; 
+            const motoristsInjuredLabels = (motoristsInjuredByBoroughAndYear && motoristsInjuredByBoroughAndYear.labels) ?
+            motoristsInjuredByBoroughAndYear.labels : ['Manhattan', 'Bronx','Brooklyn', 'Queens', 'Staten Island']; 
+            const motoristsInjuredDataPoints = (motoristsInjuredByBoroughAndYear && motoristsInjuredByBoroughAndYear.data) ?
+            motoristsInjuredByBoroughAndYear.data : [0, 1, 2, 3, 4]; 
+            const ctx4 = document.getElementById('motoristsInjuredChart'); 
+            if (ctx4) { new Chart(ctx4, { 
+              type: 'bar', 
+              data: { 
+                labels: motoristsInjuredLabels,
+                datasets: [{ 
+                  label: 'Motorists Injured by Borough and Year', 
+                  data: motoristsInjuredDataPoints, 
+                  borderColor: 'rgba(0, 102, 204, 1)',
+                  backgroundColor: 'rgba(0, 102, 204, 0.65)', 
+                  pointRadius: 3, 
+                  tension: 0.25, fill: true 
+                }] 
+              }, 
+              options: { 
+                responsive: true,
+                maintainAspectRatio: false, 
+                scales: { 
+                  y: { 
+                    beginAtZero: true, 
+                    title: { display: true, text: 'Motorists Injured' } }, 
+                    x: { title: { display: true, text: 'Boroughs' } } 
+                } 
+              } 
+            }); 
+          }
+          </script>
+        </div>
+      </div>
+
+      <div class="column-chart">
+        <h2>Motorists Killed by Borough and Year</h2>
+        <div class="chart-container">
+          <canvas id="motoristsKilledChart"></canvas>
+          <script>
+            const motoristsKilledByBoroughAndYear =
+            {{#if motoristsKilledByBoroughObj}}{{{json
+                motoristsKilledByBoroughObj
+              }}}{{else}}{}{{/if}}; 
+            const motoristsKilledLabels = (motoristsKilledByBoroughAndYear && motoristsKilledByBoroughAndYear.labels) ?
+            motoristsKilledByBoroughAndYear.labels : ['Manhattan', 'Bronx','Brooklyn', 'Queens', 'Staten Island']; 
+            const motoristsKilledDataPoints = (motoristsKilledByBoroughAndYear && motoristsKilledByBoroughAndYear.data) ?
+            motoristsKilledByBoroughAndYear.data : [0, 1, 2, 3, 4]; 
+            const ctx5 = document.getElementById('motoristsKilledChart'); 
+            if (ctx5) { new Chart(ctx5, { 
+              type: 'bar', 
+              data: { 
+                labels: motoristsKilledLabels,
+                datasets: [{ 
+                  label: 'Motorists Killed by Borough and Year', 
+                  data: motoristsKilledDataPoints, 
+                  borderColor: 'rgba(80, 0, 32, 1)',
+                  backgroundColor: 'rgba(80, 0, 32, 0.65)',
+                  pointRadius: 3, 
+                  tension: 0.25, 
+                  fill: true 
+                }] 
+              }, 
+              options: { 
+                responsive: true,
+                maintainAspectRatio: false, 
+                scales: { 
+                  y: { 
+                    beginAtZero: true, 
+                    title: { display: true, text: 'Motorists Killed' } 
+                  }, x: { 
+                    title: { display: true, text: 'Boroughs' } 
+                  } 
+                } 
+              } 
+            });
+          }
+          </script>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

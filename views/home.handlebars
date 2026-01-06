@@ -1,0 +1,15 @@
+<main class="container">
+  <div class="page-header">
+    <h1>{{subTitle}}</h1>
+  </div>
+  <section>
+    <p id="siteDescription">NYC Motor Vehicle Good Samaritan Website</p>
+    {{#unless isLoggedIn}}
+      <a id="signuplink" href="/register">Register Here</a><br /><br />
+      <a id="loginlink" href="/login">Login Here</a><br />
+    {{/unless}}
+    {{#if isLoggedIn}}
+      <a id="userlink" href="/landing">Landing Page</a><br />
+    {{/if}}
+  </section>
+</main>

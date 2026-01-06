@@ -1,0 +1,31 @@
+{
+  "name": "cs-546-group-21-final-project",
+  "version": "1.0.0",
+  "description": "NYC Motor Vehicle Good Samaritan Website",
+  "license": "ISC",
+  "author": "Group 21",
+  "contributors": [
+    "Joseph Keepers 20029998",
+    "Mamadou Diallo",
+    "Cedric Pollefeys",
+    "Lucia Atucha"
+  ],
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "seed": "node tasks/seed.js"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "bcryptjs": "^3.0.3",
+    "express": "^5.1.0",
+    "express-handlebars": "^8.0.4",
+    "express-session": "^1.18.2",
+    "mongodb": "^7.0.0",
+    "multer": "^2.0.2",
+    "nodemailer": "^7.0.11",
+    "xss": "^1.0.15"
+  }
+}

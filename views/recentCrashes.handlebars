@@ -1,0 +1,121 @@
+<main class="container">
+  <div class="page-header">
+    <h1>{{subTitle}}</h1>
+  </div>
+
+  <p class="lead">
+    Welcome to the NY Car Crash Search website! Here, you can search for crashes
+    by their details and explore collections of crash data.
+  </p>
+
+  <section>
+    <div class="page-header">
+      <h3 class="mb-3">Search Crashes</h3>
+      <a href="/crashes" class="btn btn-outline-secondary me-2">Reset Search</a>
+    </div>
+
+    <form action="/crashes/search" method="POST" id="searchForm">
+
+      <div class="flex-container">
+        <div class="column">
+          <label for="keyword" class="form-label">Keyword (Street, ID,
+            Description)</label>
+          <input
+            type="text"
+            class="form-control"
+            id="keyword"
+            name="keyword"
+            placeholder="Search for a crash (e.g. Broadway, T-Bone...)"
+            value="{{searchParams.keyword}}"
+          />
+        </div>
+        <div class="column">
+          <label for="borough" class="form-label">Borough</label>
+          <select class="form-select" id="borough" name="borough">
+            <option value="All">All Boroughs</option>
+            <option value="Manhattan">Manhattan</option>
+            <option value="Brooklyn">Brooklyn</option>
+            <option value="Queens">Queens</option>
+            <option value="Bronx">Bronx</option>
+            <option value="Staten Island">Staten Island</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="flex-container">
+        <div class="column">
+          <label for="dateFrom" class="form-label">From Date</label>
+          <input
+            type="date"
+            class="form-control"
+            id="dateFrom"
+            name="dateFrom"
+            value="{{searchParams.dateFrom}}"
+          />
+        </div>
+        <div class="column">
+          <label for="dateTo" class="form-label">To Date</label>
+          <input
+            type="date"
+            class="form-control"
+            id="dateTo"
+            name="dateTo"
+            value="{{searchParams.dateTo}}"
+          />
+        </div>
+      </div>
+
+      <div class="form-group mt-3">
+        <button type="submit" class="btn btn-primary" id="searchButton">
+          Search
+        </button>
+      </div>
+    </form>
+  </section>
+
+  <br />
+
+  {{#if crashes.length}}
+    <div class="crash-grid">
+      {{#each crashes}}
+        <article class="crash-card">
+          <a href="/crashes/{{this._id}}">
+            {{#if this.photos.length}}
+              <img
+                class="crash-poster"
+                alt="{{this.summary}}"
+                src="{{firstPhoto this.photos}}"
+              />
+            {{else}}
+              <img
+                class="crash-poster"
+                alt="No Image Available"
+                src="/public/images/no-image-available.png"
+              />
+            {{/if}}
+          </a>
+          <div class="card-body">
+            <a href="/crashes/{{this._id}}">
+              <h3 class="crash-info-summary">{{truncate this.summary 120}}</h3>
+            </a>
+            <div class="card-meta">
+              <p><strong>Borough:</strong> {{this.borough}}</p>
+              <p><strong>Zip Code:</strong> {{this.zipCode}}</p>
+              <p><strong>Occurred At:</strong> {{this.occurredAt}}</p>
+              <p><strong>Source:</strong> {{this.source}}</p>              
+              <p><strong>Witness Report:</strong> {{#if this.accuracyPercentage}}{{this.accuracyPercentage}}{{else}}0{{/if}}%</p>              
+            </div>
+          </div>
+        </article>
+      {{/each}}
+    </div>
+  {{else}}
+    {{#if error}}
+      <div class="alert alert-warning" role="alert">
+        {{error}}
+      </div>
+    {{/if}}
+  {{/if}}
+</main>
+
+<script src="/public/js/search.js"></script>

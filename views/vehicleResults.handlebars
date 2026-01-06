@@ -1,0 +1,42 @@
+<main class="container">
+  <div class="page-header">
+    <h1>{{subTitle}}</h1>
+    <a href="/crashes/lookup" class="page-header-link">Search for Another Vehicle</a>
+  </div>
+  <br />
+
+  {{#if vehicles.length}}
+      <h2>Number of Vehicles found: {{vehicles.length}}</h2>
+
+    {{#if vehicles.length}}
+      <section>
+        <div class="row-container">      
+          <table class="my_coolratings_table">
+            <tr>
+              <th>Plate</th>
+              <th>Type</th>
+              <th>Make</th>
+              <th>Model</th>
+              <th>Year</th>
+              <th>Car Crash ID</th>
+            </tr>
+            {{#each vehicles}}
+              <tr>
+                <td>{{this.vehicleId}}</td>
+                <td>{{this.vehicleType}}</td>
+                <td>{{this.make}}</td>
+                <td>{{this.model}}</td>
+                <td>{{this.year}}</td>
+                <td><a href="/crashes/{{this.crashId}}" class="page-header-link">{{this.crashId}}</a></td>
+              </tr>
+            {{/each}}
+          </table>
+          <br />
+        </div>
+  </section>
+    {{/if}}
+  {{else}}
+    <p class="crash-not-found">{{error}}.</p>
+  {{/if}}
+
+</main>

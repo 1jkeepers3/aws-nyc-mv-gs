@@ -1,0 +1,47 @@
+<main class="container">
+  <div class="page-header">
+    <h1>{{subTitle}}</h1>
+    <a href="/crashes" class="page-header-link">Search for Another crash</a>
+  </div>
+  <br />
+
+  {{#if crashes.length}}
+    <h1>Search Results</h1>
+    {{#if size}}
+      <h2>Number of results: {{crashes.length}}</h2>
+    {{/if}}
+
+    {{#if crashes.length}}
+      <div class="crash-grid">
+        {{#each crashes}}
+          <article class="crash-card">
+            <a href="/crashes/{{this._id}}">
+              <img
+                class="crash-poster"
+                alt="{{this.summary}}"
+                src="{{firstPhoto this.photos}}"
+              />
+            </a>
+            <div class="card-body">
+              <a href="/crashes/{{this._id}}">
+                <h3 class="crash-info-summary">{{truncate
+                    this.summary
+                    120
+                  }}</h3>
+              </a>
+              <div class="card-meta">
+                <p><strong>Borough:</strong> {{this.borough}}</p>
+                <p><strong>Zip Code:</strong> {{this.zipCode}}</p>
+                <p><strong>Occurred At:</strong> {{this.occurredAt}}</p>
+                <p><strong>Source:</strong> {{this.source}}</p>
+              </div>
+            </div>
+          </article>
+        {{/each}}
+      </div>
+    {{/if}}
+  {{else}}
+    <p class="crash-not-found">{{error}}.</p>
+  {{/if}}
+
+</main>

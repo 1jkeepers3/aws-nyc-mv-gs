@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="keywords" content="{{keywords}}" />
+    <link rel="stylesheet" href="/public/css/styles.css" />
+    <title>{{title}}</title>
+  </head>
+  <body>
+    <header>
+      <h1>
+        <a href="/landing" style="text-decoration: none; color: inherit; cursor: pointer;">
+          {{title}}
+        </a>
+      </h1>
+    </header>
+    {{{body}}}
+    {{#if user}}
+      <div class="quick-links">
+        <h3>Quick Links:</h3>
+        <div class="header-link">
+          <a href="/crashes">Recent Crashes</a>
+          <a href="/crashes/add">Report a Crash</a>
+          <a href="/crashes/lookup">Vehicle Lookup</a>
+          <a href="/crashes/current/stats">Statistics</a>
+          <a href="/users/profile">Your Profile</a>
+          <a id="signoutLink" href="/signout">Sign out</a>
+        </div>
+      </div>
+    {{/if}}
+    <footer>
+      <p>&copy; 2025 NYC Crashes Database</p>
+    </footer>
+    <script type="module" src="/public/js/form_validate.js"></script>
+    <script type="module" src="/public/js/comment_validate.js"></script>
+  </body>
+</html>

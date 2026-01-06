@@ -1,0 +1,30 @@
+<main class="container">
+  <div class="page-header">
+    <h1>{{subTitle}}</h1>
+    <a href="/">Back to Home</a>
+  </div>
+  <section>
+    <div class="form-container">
+      {{#if error}}
+        <p class="error">{{error}}</p>
+      {{/if}}
+      <form id="signin-form" method="POST" action="/login">
+        <div class="form-group">
+          <label for="userId">User ID:</label>
+          <input type="text" name="userId" id="userId" />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" name="password" id="password" />
+        </div>
+        <div class="form-group">
+          <button type="submit" id="submit_button" name="submit_button">Sign In</button>
+        </div>
+      </form>
+      <div class="auth-link">
+        <a href="/register">Click here to signup!</a>
+      </div>
+    </div>
+  </section>
+</main>
