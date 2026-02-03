@@ -96,6 +96,7 @@ app.use(
     secret: process.env.SESSION_SECRET,
     saveUninitialized: false,
     resave: false,
+    proxy: true,
     store: MongoStore.create({
       mongoUrl: process.env.MONGO_URI,
       ttl: 60 * 60, // 1 hour
